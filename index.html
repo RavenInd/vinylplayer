@@ -5,10 +5,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>vinyl player</title>
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/main.css">
     </head>
     <body>
-        
+        <div class="base">
+            <div class="player">
+                <div id="record"></div>
+                <div class="toneArm"></div>
+                <label for="play-b" class="control-b"><div class="control-b-on"></div></label>
+                <input type="checkbox" id="play-b" class="hide">
+            </div>
+            <ul class="playlist">
+                <li data-id="1" id="stay">Thirty Seconds To Mars - Stay</li>
+                <li data-id="2" id="perfect">Ed Sheeran - Perfect</li>
+                <li data-id="3" id="addicted">Saving Abel - Addicted</li>
+            </ul>
+        </div>
+
+        <audio id="audio" src="./audio/1.mp3" controls></audio>
+        <script src="js/main.js" async></script>
+            
         
     </body>
 </html>
