@@ -97,4 +97,12 @@ body {
     display: none;
 }
 
+#tracktime {
+    position: absolute;
+    padding: 20px;
+    border: 5px solid red;
+    right: 5%;
+    top: 50%;
+}
+
 

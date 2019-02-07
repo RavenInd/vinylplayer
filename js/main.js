@@ -40,3 +40,8 @@ const button = document.getElementById("play-b"),
         tumbler.classList.toggle('tumbl');
         record.style.animation = "none";
     });
+
+    audio.addEventListener("abort", function (event) {
+        tumbler.classList.toggle('tumbl');
+        record.style.animation = "none";
+    });
