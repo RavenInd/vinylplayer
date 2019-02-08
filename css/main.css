@@ -22,6 +22,7 @@ body {
     height: 780px;
     left: 15%;
     top: 1%;
+    box-shadow: 0 10px 20px 10px black;
 }
 
 #record {
@@ -35,6 +36,55 @@ body {
     left: 5px;
     animation: none;
 }
+#songName {
+    position: relative;
+    width: 20%; 
+    padding-top: 40%; 
+    border-radius: 100%;  /* сделать "резиновый" круг */
+    font: 16px monospace;  /* моноширный шрифт */
+    margin: 30% auto;
+    color: rgb(247, 216, 149);
+}
+#songName b {
+    position: absolute; left: 50%;  /* все буквы собрать в одну точку по середине */
+    width: 0;  /* убрать отступ */
+}
+#songName b:nth-of-type(-n+30) {
+    bottom: 50%;
+    transform-origin: 0% 100%;
+    padding-bottom: 50%;  /* от значения свойства зависит приближение текста к центру круга */
+  }
+  #songName b:nth-of-type(1) {transform: rotate(325deg);}
+  #songName b:nth-of-type(2) {transform: rotate(330deg);}
+  #songName b:nth-of-type(3) {transform: rotate(335deg);}
+  #songName b:nth-of-type(4) {transform: rotate(340deg);}
+  #songName b:nth-of-type(5) {transform: rotate(345deg);}
+  #songName b:nth-of-type(6) {transform: rotate(350deg);}
+  #songName b:nth-of-type(7) {transform: rotate(355deg);}
+  #songName b:nth-of-type(8) {transform: rotate(0deg);}
+  #songName b:nth-of-type(9) {transform: rotate(5deg);}
+  #songName b:nth-of-type(10) {transform: rotate(10deg);}
+  #songName b:nth-of-type(11) {transform: rotate(15deg);}
+  #songName b:nth-of-type(12) {transform: rotate(20deg);}
+  #songName b:nth-of-type(13) {transform: rotate(25deg);}
+  #songName b:nth-of-type(14) {transform: rotate(30deg);}
+  #songName b:nth-of-type(15) {transform: rotate(35deg);}
+  #songName b:nth-of-type(16) {transform: rotate(40deg);}
+  #songName b:nth-of-type(17) {transform: rotate(45deg);}
+  #songName b:nth-of-type(18) {transform: rotate(45deg);}
+  #songName b:nth-of-type(19) {transform: rotate(50deg);}
+  #songName b:nth-of-type(20) {transform: rotate(55deg);}
+  #songName b:nth-of-type(21) {transform: rotate(60deg);}
+  #songName b:nth-of-type(22) {transform: rotate(65deg);}
+  #songName b:nth-of-type(23) {transform: rotate(70deg);}
+  #songName b:nth-of-type(24) {transform: rotate(75deg);}
+  #songName b:nth-of-type(25) {transform: rotate(80deg);}
+  #songName b:nth-of-type(26) {transform: rotate(85deg);}
+  #songName b:nth-of-type(27) {transform: rotate(90deg);}
+  #songName b:nth-of-type(28) {transform: rotate(95deg);}
+  #songName b:nth-of-type(29) {transform: rotate(100deg);}
+  #songName b:nth-of-type(30) {transform: rotate(105deg);}
+
 
 .toneArm {
     background: url('../img/3.png');
@@ -77,12 +127,12 @@ body {
     opacity: 0;
 }
 
-.playlist {
+#playlist {
     position: absolute;
     right: 10px;
     list-style-type: none;
 }
-.playlist li {
+#playlist li {
     background: rgba(132, 181, 238, 0.473);
     width: 150px;
     padding: 15px 5px;
@@ -90,7 +140,7 @@ body {
     text-align: center;
     margin: 5px;
 }
-.playlist li:hover {
+#playlist li:hover {
     cursor: pointer;
 }
 #audio {

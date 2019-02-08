@@ -10,20 +10,24 @@
     <body>
         <div class="base">
             <div class="player">
-                <div id="record"></div>
+                <div id="record">
+                        <div id="songName">
+                            </div>
+                </div>
                 <div class="toneArm"></div>
                 <label for="play-b" class="control-b"><div class="control-b-on"></div></label>
                 <input type="checkbox" id="play-b" class="hide">
             </div>
-            <ul class="playlist">
-                <li data-id="1" id="stay">Thirty Seconds To Mars - Stay</li>
-                <li data-id="2" id="perfect">Ed Sheeran - Perfect</li>
-                <li data-id="3" id="addicted">Saving Abel - Addicted</li>
+            <ul id="playlist">
+                <li data-src="1" >Thirty Seconds To Mars - Stay</li>
+                <li data-src="2" >Ed Sheeran - Perfect</li>
+                <li data-src="3" >Saving Abel - Addicted</li>
+                <li data-src="4">Хлеб - Шашлындос</li>
             </ul>
             <span id="tracktime">0 / 0</span>
         </div>
 
-        <audio id="audio" src="./audio/1.mp3" controls></audio>
+        <audio id="audio" src="" controls></audio>
         <script src="js/main.js" async></script>
             
         

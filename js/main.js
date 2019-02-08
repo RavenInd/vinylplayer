@@ -1,11 +1,10 @@
 
 const button = document.getElementById("play-b"),
       tumbler = document.getElementsByClassName("control-b-on")[0];
-      track1 = document.getElementById("stay"),
-      track2 = document.getElementById("perfect"),
-      track3 = document.getElementById("addicted"),
+      playlist = document.getElementById("playlist"),
        audio = document.getElementById("audio"),
-      record = document.getElementById("record");
+      record = document.getElementById("record")
+      songName = document.getElementById("songName");
 
 
     console.dir(audio);
@@ -15,18 +14,19 @@ const button = document.getElementById("play-b"),
     });
 
 //---------------------------------------------------------
-    track1.addEventListener('click', function (event) {
-        audio.setAttribute('src', "./audio/1.mp3");
-
-    });
-
-    track2.addEventListener('click', function (event) {
-        audio.setAttribute('src', "./audio/2.mp3");
-
-    });
-
-    track3.addEventListener('click', function (event) {
-        audio.setAttribute('src', "./audio/3.mp3");
+    playlist.addEventListener('click', function (event) {
+        const target = event.target;
+        let src = target.getAttribute('data-src'),
+        nameOfSongArr = target.textContent.split(''),
+        nameOfSong;
+        nameOfSong = nameOfSongArr.map((letter) => {
+            return '<b>' + letter + '</b>';
+        });
+        nameOfSong = nameOfSong.join('');
+        songName.innerHTML = nameOfSong;
+    
+        audio.setAttribute('src', "./audio/" + src + ".mp3");
+        
 
     });
 //---------------------------------------------------------
