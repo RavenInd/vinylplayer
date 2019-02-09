@@ -45,3 +45,36 @@ const button = document.getElementById("play-b"),
         tumbler.classList.toggle('tumbl');
         record.style.animation = "none";
     });
+//-----------------------------------------------------------
+function updateTrackTime(){
+    var currTimeDiv = document.getElementById('currentTime');
+    var durationDiv = document.getElementById('duration');
+  
+    var currTime = (Math.floor(audio.currentTime * 1000)/1000).toString(); 
+    var duration = (Math.floor(audio.duration * 1000)/1000).toString();
+  
+    currTimeDiv.innerHTML = formatSecondsAsTime(currTime);
+  
+    if (isNaN(duration)){
+      durationDiv.innerHTML = '00:00';
+    } 
+    else{
+      durationDiv.innerHTML = formatSecondsAsTime(duration);
+    }
+  };
+  function formatSecondsAsTime(secs, format) {
+    var hr  = Math.floor(secs / 3600);
+    var min = Math.floor((secs - (hr * 3600))/60);
+    var sec = Math.floor((secs - (hr * 3600) -  (min * 60)) * 1000) / 1000;
+  
+    if (min < 10){ 
+      min = "0" + min; 
+    }
+    if (sec < 10){ 
+      sec  = "0" + sec;
+    }
+
+    return min + ':' + sec;
+  };
+
+    audio.addEventListener("timeupdate", updateTrackTime);
