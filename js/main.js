@@ -4,7 +4,8 @@ const button = document.getElementById("play-b"),
       playlist = document.getElementById("playlist"),
        audio = document.getElementById("audio"),
       record = document.getElementById("record")
-      songName = document.getElementById("songName");
+      songName = document.getElementById("songName")
+      toneArm = document.getElementById("toneArm");
 
 
     console.dir(audio);
@@ -15,6 +16,9 @@ const button = document.getElementById("play-b"),
 
 //---------------------------------------------------------
     playlist.addEventListener('click', function (event) {
+        if(!audio.paused) {
+            tumbler.classList.toggle('tumbl');
+        }
         const target = event.target;
         let src = target.getAttribute('data-src'),
         nameOfSongArr = target.textContent.split(''),
@@ -32,19 +36,30 @@ const button = document.getElementById("play-b"),
 //---------------------------------------------------------
     audio.addEventListener("play", function (event) {
         tumbler.classList.toggle('tumbl');
-        record.style.animation = "recordRotation 10s infinite linear";
+        record.style.animationPlayState = "running";
 
+        if(!toneArm.style.animationName) {
+            toneArm.style.animationName = "toneArmMovement";
+            toneArm.style.animationDuration = audio.duration + "s";
+            toneArm.style.animationTimingFunction = "linear";
+        } else {
+            toneArm.style.animationPlayState = "running";
+        }
+        
     });
 
     audio.addEventListener("pause", function (event) {
         tumbler.classList.toggle('tumbl');
-        record.style.animation = "none";
+        record.style.animationPlayState = "paused";
+        toneArm.style.animationPlayState = "paused";
     });
+    
 
     audio.addEventListener("abort", function (event) {
-        tumbler.classList.toggle('tumbl');
-        record.style.animation = "none";
+        record.style.animationPlayState = "paused";
+        toneArm.style.animationName = "";
     });
+
 //-----------------------------------------------------------
 function updateTrackTime(){
     var currTimeDiv = document.getElementById('currentTime');
