@@ -1,40 +1,42 @@
-
+//-----------------------Variables---------------------------------
 const button = document.getElementById("play-b"),
       tumbler = document.getElementsByClassName("control-b-on")[0];
       playlist = document.getElementById("playlist"),
-       audio = document.getElementById("audio"),
+      audio = document.getElementById("audio"),
       record = document.getElementById("record")
       songName = document.getElementById("songName")
       toneArm = document.getElementById("toneArm");
 
+//-----------------------Button handling function---------------------------------
 
-    console.dir(audio);
-
-    button.addEventListener('change', function (event) {
+    function buttonHandler(event) {
         audio.paused ? audio.play() : audio.pause();
-    });
+    }
 
-//---------------------------------------------------------
-    playlist.addEventListener('click', function (event) {
+//-----------------------Playlist handling function---------------------------------
+    function playlistHandler (event) {
         if(!audio.paused) {
             tumbler.classList.toggle('tumbl');
         }
+
         const target = event.target;
         let src = target.getAttribute('data-src'),
-        nameOfSongArr = target.textContent.split(''),
-        nameOfSong;
+            nameOfSongArr = target.textContent.split(''),
+            nameOfSong;
+
         nameOfSong = nameOfSongArr.map((letter) => {
             return '<b>' + letter + '</b>';
         });
         nameOfSong = nameOfSong.join('');
         songName.innerHTML = nameOfSong;
-    
-        audio.setAttribute('src', "./audio/" + src + ".mp3");
-        
 
-    });
-//---------------------------------------------------------
-    audio.addEventListener("play", function (event) {
+        audio.setAttribute('src', "./audio/" + src + ".mp3");
+    };
+//-----------------------Play, pause and abort handling---------------------------------
+
+
+    function play(event) {
+
         tumbler.classList.toggle('tumbl');
         record.style.animationPlayState = "running";
 
@@ -45,22 +47,20 @@ const button = document.getElementById("play-b"),
         } else {
             toneArm.style.animationPlayState = "running";
         }
-        
-    });
+    };
 
-    audio.addEventListener("pause", function (event) {
+    function pause (event) {
         tumbler.classList.toggle('tumbl');
         record.style.animationPlayState = "paused";
         toneArm.style.animationPlayState = "paused";
-    });
-    
+    }
 
-    audio.addEventListener("abort", function (event) {
+    function abort (event) {
         record.style.animationPlayState = "paused";
         toneArm.style.animationName = "";
-    });
+    };
 
-//-----------------------------------------------------------
+//-----------------------Formating and updating Time Tracker---------------------------------
 function updateTrackTime(){
     var currTimeDiv = document.getElementById('currentTime');
     var durationDiv = document.getElementById('duration');
@@ -77,7 +77,7 @@ function updateTrackTime(){
       durationDiv.innerHTML = formatSecondsAsTime(duration);
     }
   };
-  function formatSecondsAsTime(secs, format) {
+function formatSecondsAsTime(secs, format) {
     var hr  = Math.floor(secs / 3600);
     var min = Math.floor((secs - (hr * 3600))/60);
     var sec = Math.floor((secs - (hr * 3600) -  (min * 60)) * 1000) / 1000;
@@ -88,8 +88,13 @@ function updateTrackTime(){
     if (sec < 10){ 
       sec  = "0" + sec;
     }
-
     return min + ':' + sec;
   };
+//-----------------------Event Listeners---------------------------------
 
     audio.addEventListener("timeupdate", updateTrackTime);
+    audio.addEventListener("play", play);
+    audio.addEventListener("pause", pause);
+    audio.addEventListener("abort", abort);
+    playlist.addEventListener('click', playlistHandler);
+    button.addEventListener('change', buttonHandler);
