@@ -113,7 +113,7 @@ left: -20px;
 transform-origin: center 120px;
 transform: rotate(10deg);
 animation-name: none;
-animation-iteration-count: 1;
+animation-iteration-count: infinite;
 }
 
 .control-b {

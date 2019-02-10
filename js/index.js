@@ -85,6 +85,7 @@ function trackerHandler(event) {
         }
         audio.currentTime = audio.duration - restTimeOfTrack;
     }
+    console.dir(toneArm);
 }
 
 
@@ -113,6 +114,12 @@ function trackerHandler(event) {
     }
 
     function abort (event) {
+        record.style.animationPlayState = "paused";
+        toneArm.style.animationName = "";
+        toneArm.style.transform = "rotate(10deg)";
+    };
+
+    function end (event) {
         record.style.animationPlayState = "paused";
         toneArm.style.animationName = "";
         toneArm.style.transform = "rotate(10deg)";
@@ -155,12 +162,10 @@ function formatSecondsAsTime(secs, format) {
     audio.addEventListener("play", play);
     audio.addEventListener("pause", pause);
     audio.addEventListener("abort", abort);
+    audio.addEventListener("ended", end);
     playlist.addEventListener('click', playlistHandler);
     button.addEventListener('change', buttonHandler);
     tracker.addEventListener('click', trackerHandler);
-
-
-
 
 
     
