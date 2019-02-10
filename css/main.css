@@ -13,7 +13,7 @@ transform: rotate(-720deg);
 
 @keyframes toneArmMovement {
 
-to   {transform: rotate(-13deg)}
+to {transform: rotate(-13deg)}
 }
 
 body {
