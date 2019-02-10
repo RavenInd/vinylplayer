@@ -12,7 +12,9 @@ const button = document.getElementById("play-b"),
 //-----------------------Button handling function---------------------------------
 
     function buttonHandler(event) {
-        audio.paused ? audio.play() : audio.pause();
+        if(audio.getAttribute('src')) {
+            audio.paused ? audio.play() : audio.pause();
+        }
     }
 
 //-----------------------Playlist handling function---------------------------------
