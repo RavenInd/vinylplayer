@@ -11,9 +11,16 @@
         <div class="base">
             <div class="player">
                 <div id="record">
-                        <div id="songName">
-                            </div>
+                        <div id="songName"></div> 
                 </div>
+                <svg id="svgTracker">
+                    <circle id="tracker" r="340" cx="340" cy="340"
+                            fill="transparent" stroke="crimson" stroke-width="1">
+                </circle>
+                    <circle id="trackerInactiveZone" r="150" cx="340" cy="340"
+                            fill="transparent" stroke="crimson" stroke-width="1" />
+               </svg>
+
                 <div id="toneArm"></div>
                 <label for="play-b" class="control-b"><div class="control-b-on"></div></label>
                 <input type="checkbox" id="play-b" class="hide">
@@ -27,6 +34,8 @@
                 <li data-src="2" >Ed Sheeran - Perfect</li>
                 <li data-src="3" >Saving Abel - Addicted</li>
                 <li data-src="4">Хлеб - Шашлындос</li>
+                <li data-src="5">Apocalyptica - Not Strong Enough</li>
+                <li data-src="6">MiaGi and Эндшпиль - Rapapam</li>
             </ul>
 
 
@@ -34,6 +43,7 @@
 
         <audio id="audio" src="" controls></audio>
         <script src="js/main.js" async></script>
+        <script src="js/tracker.js" async></script>
             
         
     </body>

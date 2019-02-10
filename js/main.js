@@ -5,7 +5,9 @@ const button = document.getElementById("play-b"),
       audio = document.getElementById("audio"),
       record = document.getElementById("record")
       songName = document.getElementById("songName")
-      toneArm = document.getElementById("toneArm");
+      toneArm = document.getElementById("toneArm"),
+      tracker = document.getElementById("tracker"),
+      trackerInactiveZone = document.getElementById("trackerInactiveZone");
 
 //-----------------------Button handling function---------------------------------
 
@@ -44,6 +46,7 @@ const button = document.getElementById("play-b"),
             toneArm.style.animationName = "toneArmMovement";
             toneArm.style.animationDuration = audio.duration + "s";
             toneArm.style.animationTimingFunction = "linear";
+            toneArm.style.animationPlayState = "running";
         } else {
             toneArm.style.animationPlayState = "running";
         }
@@ -90,6 +93,57 @@ function formatSecondsAsTime(secs, format) {
     }
     return min + ':' + sec;
   };
+//-----------------------Tracker Handler function------------------------
+
+function trackerHandler(event) {
+    
+    const trackerRect = tracker.getBoundingClientRect(),
+          trackerInactiveZoneRect = trackerInactiveZone.getBoundingClientRect(),
+          trackerLength = (trackerRect.width - trackerInactiveZoneRect.width)/2,
+          centerX = trackerInactiveZoneRect.x + trackerInactiveZoneRect.width/2 - trackerRect.x,  //center of record X
+          centerY = trackerInactiveZoneRect.y + trackerInactiveZoneRect.height/2 - trackerRect.y; // center of record Y
+
+    let xLength,
+        yLength,
+        restLengthOfTracker,
+        restTimeOfTrack,
+        restToneArmRotationDeg;
+
+        if (centerX >= event.offsetX) {
+            xLength = centerX - event.offsetX;
+        } else {
+            xLength = event.offsetX - centerX;
+        }
+
+        if (centerY >= event.offsetY) {
+            yLength = centerY - event.offsetY;
+        } else {
+            yLength = event.offsetY - centerY;
+        }
+
+    restLengthOfTracker = Math.round((Math.sqrt(Math.pow(xLength,2) + Math.pow(yLength,2)) - trackerInactiveZoneRect.width/2) * 1000) / 1000; //Вычисляем сколько осталось до конца трека.
+
+    restTimeOfTrack = Math.round(audio.duration * restLengthOfTracker/trackerLength * 1000)/1000;
+    restToneArmRotationDeg = Math.round(23 * restLengthOfTracker/trackerLength * 1000)/1000;
+
+    if(audio.getAttribute('src')) {  //Debuggin to miss error <Failed to set the 'currentTime' property on 'HTMLMediaElement'>
+        
+        toneArm.style.animationName = "none";
+        toneArm.style.animationDuration = "0.000000000s";
+        toneArm.style.animationPlayState = "paused";
+        toneArm.style.transform = `rotate(${restToneArmRotationDeg - 13}deg)`;
+        toneArm.style.animationName = "toneArmMovement";
+        toneArm.style.animationDuration = `${restTimeOfTrack}s`;
+
+        if(!audio.paused) {
+            toneArm.style.animationPlayState = "running";
+        }
+        audio.currentTime = audio.duration - restTimeOfTrack;
+    }
+}
+
+
+
 //-----------------------Event Listeners---------------------------------
 
     audio.addEventListener("timeupdate", updateTrackTime);
@@ -98,3 +152,10 @@ function formatSecondsAsTime(secs, format) {
     audio.addEventListener("abort", abort);
     playlist.addEventListener('click', playlistHandler);
     button.addEventListener('change', buttonHandler);
+    tracker.addEventListener('click', trackerHandler);
+
+
+
+
+
+    
