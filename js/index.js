@@ -83,9 +83,9 @@ function trackerHandler(event) {
         if(!audio.paused) {
             toneArm.style.animationPlayState = "running";
         }
-        
-    }
     audio.currentTime = audio.duration - restTimeOfTrack;
+    }
+
 }
 
 
