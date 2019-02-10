@@ -36,7 +36,8 @@ const button = document.getElementById("play-b"),
 
         audio.setAttribute('src', "./audio/" + src + ".mp3");
     };
-    //-----------------------Tracker Handler function------------------------
+
+//-----------------------Tracker Handler function------------------------
 
 function trackerHandler(event) {
     
@@ -85,7 +86,6 @@ function trackerHandler(event) {
         }
         audio.currentTime = audio.duration - restTimeOfTrack;
     }
-    console.dir(toneArm);
 }
 
 
@@ -166,6 +166,5 @@ function formatSecondsAsTime(secs, format) {
     playlist.addEventListener('click', playlistHandler);
     button.addEventListener('change', buttonHandler);
     tracker.addEventListener('click', trackerHandler);
-
 
     
