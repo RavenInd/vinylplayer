@@ -70,6 +70,11 @@ function trackerHandler(event) {
     restTimeOfTrack = Math.round(audio.duration * restLengthOfTracker/trackerLength * 1000)/1000;
     restToneArmRotationDeg = Math.round(23 * restLengthOfTracker/trackerLength * 1000)/1000;
 
+    let prevTime = audio.currentTime;
+    
+    let delta = 23 * prevTime / toneArm.style.animationDuration;
+
+
     if(audio.getAttribute('src')) {  //Debuggin to miss error <Failed to set the 'currentTime' property on 'HTMLMediaElement'>
         toneArm.style.transform = `rotate(${restToneArmRotationDeg - 13}deg)`;
         toneArm.style.animationName = "toneArmMovement";
@@ -80,6 +85,7 @@ function trackerHandler(event) {
         }
         
     }
+    audio.currentTime = audio.duration - restTimeOfTrack;
 }
 
 
