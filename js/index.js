@@ -122,7 +122,6 @@ function trackerHandler(event) {
     function end (event) {
         record.style.animationPlayState = "paused";
         toneArm.style.animationName = "";
-        toneArm.style.transform = "rotate(10deg)";
     };
 
 //-----------------------Formating and updating Time Tracker---------------------------------
